@@ -3,7 +3,11 @@ import os
 
 import pytest
 
-from flextds.flexcoco.utils import filter_dicts_by_inclusion, filter_dicts_by_exclusion, filter_dataset
+from flextds.flexcoco.utils import (
+    filter_dicts_by_inclusion,
+    filter_dicts_by_exclusion,
+    filter_dataset,
+)
 
 DATA_DIR = os.path.dirname(__file__).replace("flexcoco", "data")
 annotation_file = str(os.path.join(DATA_DIR, "sample_coco.json"))
@@ -150,12 +154,16 @@ def test_filter_dataset__include_images():
     assert filtered_ann["categories"] == origin_categories
 
     # images should be filtered by include_files
-    filtered_images = filter_dicts_by_inclusion(origin_images, "file_name", include_files)
+    filtered_images = filter_dicts_by_inclusion(
+        origin_images, "file_name", include_files
+    )
     assert filtered_ann["images"] == filtered_images
 
     # annotations should be filtered by image_id
     filtered_image_ids = [image["id"] for image in filtered_images]
-    filtered_annotations = filter_dicts_by_inclusion(origin_annotations, "image_id", filtered_image_ids)
+    filtered_annotations = filter_dicts_by_inclusion(
+        origin_annotations, "image_id", filtered_image_ids
+    )
     assert filtered_ann["annotations"] == filtered_annotations
 
 
@@ -179,12 +187,16 @@ def test_filter_dataset__exclude_images():
     assert filtered_ann["categories"] == origin_categories
 
     # images should be filtered by exclude_files
-    filtered_images = filter_dicts_by_exclusion(origin_images, "file_name", exclude_files)
+    filtered_images = filter_dicts_by_exclusion(
+        origin_images, "file_name", exclude_files
+    )
     assert filtered_ann["images"] == filtered_images
 
     # annotations should be filtered by image_id
     filtered_image_ids = [image["id"] for image in filtered_images]
-    filtered_annotations = filter_dicts_by_inclusion(origin_annotations, "image_id", filtered_image_ids)
+    filtered_annotations = filter_dicts_by_inclusion(
+        origin_annotations, "image_id", filtered_image_ids
+    )
     assert filtered_ann["annotations"] == filtered_annotations
 
 
@@ -200,7 +212,9 @@ def test_filter_dataset__include_exclude_images():
     # include_categories = ["label1", "label2", "label3"]
     # exclude_categories = ["label3"]
 
-    filtered_ann = filter_dataset(annotation_file, include_files=include_files, exclude_files=exclude_files)
+    filtered_ann = filter_dataset(
+        annotation_file, include_files=include_files, exclude_files=exclude_files
+    )
 
     # info, licenses and categories should not be changed
     assert filtered_ann["info"] == origin_info
@@ -208,13 +222,19 @@ def test_filter_dataset__include_exclude_images():
     assert filtered_ann["categories"] == origin_categories
 
     # images should be filtered by exclude_files
-    filtered_image = filter_dicts_by_inclusion(origin_images, "file_name", include_files)
-    filtered_images = filter_dicts_by_exclusion(filtered_image, "file_name", exclude_files)
+    filtered_image = filter_dicts_by_inclusion(
+        origin_images, "file_name", include_files
+    )
+    filtered_images = filter_dicts_by_exclusion(
+        filtered_image, "file_name", exclude_files
+    )
     assert filtered_ann["images"] == filtered_images
 
     # annotations should be filtered by image_id
     filtered_image_ids = [image["id"] for image in filtered_images]
-    filtered_annotations = filter_dicts_by_inclusion(origin_annotations, "image_id", filtered_image_ids)
+    filtered_annotations = filter_dicts_by_inclusion(
+        origin_annotations, "image_id", filtered_image_ids
+    )
     assert filtered_ann["annotations"] == filtered_annotations
 
 
@@ -230,19 +250,25 @@ def test_filter_dataset__include_categories():
     include_categories = ["label1", "label2", "label3"]
     # exclude_categories = ["label3"]
 
-    filtered_ann = filter_dataset(annotation_file, include_categories=include_categories)
+    filtered_ann = filter_dataset(
+        annotation_file, include_categories=include_categories
+    )
 
     # info and licenses should not be changed
     assert filtered_ann["info"] == origin_info
     assert filtered_ann["licenses"] == origin_licenses
 
     # categories should be filtered by include_categories
-    filtered_categories = filter_dicts_by_inclusion(origin_categories, "name", include_categories)
+    filtered_categories = filter_dicts_by_inclusion(
+        origin_categories, "name", include_categories
+    )
     assert filtered_ann["categories"] == filtered_categories
 
     # annotations should be filtered by category_id
     filtered_category_ids = [category["id"] for category in filtered_categories]
-    filtered_annotations = filter_dicts_by_inclusion(origin_annotations, "category_id", filtered_category_ids)
+    filtered_annotations = filter_dicts_by_inclusion(
+        origin_annotations, "category_id", filtered_category_ids
+    )
     assert filtered_ann["annotations"] == filtered_annotations
 
     # images should be filtered by image_id
@@ -263,19 +289,25 @@ def test_filter_dataset__exclude_categories():
     # include_categories = ["label1", "label2", "label3"]
     exclude_categories = ["label3"]
 
-    filtered_ann = filter_dataset(annotation_file, exclude_categories=exclude_categories)
+    filtered_ann = filter_dataset(
+        annotation_file, exclude_categories=exclude_categories
+    )
 
     # info and licenses should not be changed
     assert filtered_ann["info"] == origin_info
     assert filtered_ann["licenses"] == origin_licenses
 
     # categories should be filtered by exclude_categories
-    filtered_categories = filter_dicts_by_exclusion(origin_categories, "name", exclude_categories)
+    filtered_categories = filter_dicts_by_exclusion(
+        origin_categories, "name", exclude_categories
+    )
     assert filtered_ann["categories"] == filtered_categories
 
     # annotations should be filtered by category_id
     filtered_category_ids = [category["id"] for category in filtered_categories]
-    filtered_annotations = filter_dicts_by_inclusion(origin_annotations, "category_id", filtered_category_ids)
+    filtered_annotations = filter_dicts_by_inclusion(
+        origin_annotations, "category_id", filtered_category_ids
+    )
     assert filtered_ann["annotations"] == filtered_annotations
 
     # images should be filtered by image_id
@@ -296,21 +328,29 @@ def test_filter_dataset__include_exclude_categories():
     include_categories = ["label1", "label2", "label3"]
     exclude_categories = ["label3"]
 
-    filtered_ann = filter_dataset(annotation_file,
-                                  include_categories=include_categories,
-                                  exclude_categories=exclude_categories)
+    filtered_ann = filter_dataset(
+        annotation_file,
+        include_categories=include_categories,
+        exclude_categories=exclude_categories,
+    )
     # info and licenses should not be changed
     assert filtered_ann["info"] == origin_info
     assert filtered_ann["licenses"] == origin_licenses
 
     # categories should be filtered by include_categories
-    filtered_categories = filter_dicts_by_inclusion(origin_categories, "name", include_categories)
-    filtered_categories = filter_dicts_by_exclusion(filtered_categories, "name", exclude_categories)
+    filtered_categories = filter_dicts_by_inclusion(
+        origin_categories, "name", include_categories
+    )
+    filtered_categories = filter_dicts_by_exclusion(
+        filtered_categories, "name", exclude_categories
+    )
     assert filtered_ann["categories"] == filtered_categories
 
     # annotations should be filtered by category_id
     filtered_category_ids = [category["id"] for category in filtered_categories]
-    filtered_annotations = filter_dicts_by_inclusion(origin_annotations, "category_id", filtered_category_ids)
+    filtered_annotations = filter_dicts_by_inclusion(
+        origin_annotations, "category_id", filtered_category_ids
+    )
     assert filtered_ann["annotations"] == filtered_annotations
 
     # images should be filtered by image_id

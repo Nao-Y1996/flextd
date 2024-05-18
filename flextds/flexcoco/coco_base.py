@@ -22,14 +22,17 @@ class FlexCocoDatasetBase(Dataset):
         list of image ids
     """
 
-    def __init__(self, image_dir: str,
-                 annotation_file: str,
-                 data_transforms=None,
-                 label_transforms=None,
-                 include_files: list[str] = None,
-                 exclude_files: list[str] = None,
-                 include_categories: list[str] = None,
-                 exclude_categories: list[str] = None, ):
+    def __init__(
+        self,
+        image_dir: str,
+        annotation_file: str,
+        data_transforms=None,
+        label_transforms=None,
+        include_files: list[str] = None,
+        exclude_files: list[str] = None,
+        include_categories: list[str] = None,
+        exclude_categories: list[str] = None,
+    ):
         """
         constructor of CustomCocoDataset.
         When include_files is given, only the images with the file names in the list are used.
@@ -57,11 +60,13 @@ class FlexCocoDatasetBase(Dataset):
             list of category names to exclude
         """
 
-        annotation_file = create_filtered_annotation_file(annotation_file=annotation_file,
-                                                          include_files=include_files,
-                                                          exclude_files=exclude_files,
-                                                          include_categories=include_categories,
-                                                          exclude_categories=exclude_categories)
+        annotation_file = create_filtered_annotation_file(
+            annotation_file=annotation_file,
+            include_files=include_files,
+            exclude_files=exclude_files,
+            include_categories=include_categories,
+            exclude_categories=exclude_categories,
+        )
         self.coco = COCO(str(annotation_file))
         self.image_dir = image_dir
         self.data_transforms = data_transforms
@@ -81,11 +86,11 @@ class FlexCocoDatasetBase(Dataset):
         :return: category name
         """
         categories = self.coco.loadCats(category_id)
-        return categories[0]['name']
+        return categories[0]["name"]
 
     def get_categories(self) -> list[str]:
         """
         get all category names.
         """
         categories = self.coco.loadCats(self.coco.getCatIds())
-        return [category['name'] for category in categories]
+        return [category["name"] for category in categories]
