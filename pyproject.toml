@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "flextds"
+version = "0.1.0"
+description = "Flexible datasets for PyTorch"
+authors = ["Nao-Y1996 <60519909+Nao-Y1996@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.8,<3.12"
+torch = ">=2.0.0,<2.3"
+torchvision = ">=0.15,<0.18"
+pycocotools = "^2.0.7"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
