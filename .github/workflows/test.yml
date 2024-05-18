@@ -3,6 +3,16 @@ name: Test
 on: [push, pull_request]
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: psf/black@stable
+        with:
+          options: "--check --verbose"
+          src: "./flextd", "./tests"
+          jupyter: false
+          use_pyproject: true
   test:
     runs-on: ubuntu-latest
     strategy:
