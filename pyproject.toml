@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "flextds"
+name = "flextd"
 version = "0.1.0"
-description = "Flexible datasets for PyTorch"
+description = "Flexible Pytorch Dataset"
 authors = ["Nao-Y1996 <60519909+Nao-Y1996@users.noreply.github.com>"]
 readme = "README.md"
 
