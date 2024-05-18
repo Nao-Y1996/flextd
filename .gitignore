@@ -1,4 +1,7 @@
 .idea
 .venv
-coco128
+datasets
 **/__pycache__/**
+notebooks/**
+!notebooks/sample.ipynb
+
