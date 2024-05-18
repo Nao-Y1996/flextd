@@ -12,4 +12,4 @@ jobs:
           options: "--check --verbose"
           src: "."
           jupyter: false
-          version: "^24.4.2"  # same as the version in pyproject.toml
+          version: "~= 24.4.2"  # same as the version in pyproject.toml
