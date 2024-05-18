@@ -4,6 +4,21 @@ version = "0.1.0"
 description = "Flexible Pytorch Dataset"
 authors = ["Nao-Y1996 <60519909+Nao-Y1996@users.noreply.github.com>"]
 readme = "README.md"
+homepage = "https://github.com/Nao-Y1996/flextd"
+repository = "https://github.com/Nao-Y1996/flextd"
+license = "MIT"
+keywords = ["pytorch", "dataset", "COCO", "torchvision"]
+classifiers = [
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
 
 [tool.poetry.dependencies]
 python = ">=3.8,<3.12"
@@ -19,3 +34,6 @@ black = "^24.4.2"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.build]
+generate-setup-file = true

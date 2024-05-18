@@ -7,9 +7,20 @@ tasks, making it easier and more flexible to handle datasets.
 
 It provides the ability to generate new annotation files from existing annotation files, filtering the necessary
 information by specifying categories and image files to be used in training and evaluating classification models.
+You can check sample codes in the `notebooks/sample.ipynb`.
 
 In addition, a pytorch Dataset can be generated from the new annotation file.
 Datasets for object detection, semantic segmentation, instance segmentation, and keypoint detection will be provided
+
+## Installation
+
+You can install FlexTD using poetry:
+
+```bash
+git clone https://github.com/Nao-Y1996/flextd.git
+cd flextd
+poetry install
+```
 
 ## Usage
 
@@ -17,7 +28,7 @@ Here is an example of how to use the `FlexCocoDatasetBaseSS` class provided by F
 
 ```python
 import os
-from flextds.flexcoco.coco_semantic_segmentation import FlexCocoDatasetBaseSS
+from flextd.flexcoco.coco_semantic_segmentation import FlexCocoDatasetBaseSS
 from torchvision import transforms
 from torch.utils.data import DataLoader
 

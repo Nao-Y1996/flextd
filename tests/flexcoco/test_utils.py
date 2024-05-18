@@ -3,7 +3,7 @@ import os
 
 import pytest
 
-from flextds.flexcoco.utils import (
+from flextd.flexcoco.utils import (
     filter_dicts_by_inclusion,
     filter_dicts_by_exclusion,
     filter_dataset,

@@ -5,3 +5,4 @@ datasets
 notebooks/**
 !notebooks/sample.ipynb
 
+dist
