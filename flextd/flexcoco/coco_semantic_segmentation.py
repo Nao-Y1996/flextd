@@ -5,7 +5,7 @@ from pycocotools.coco import COCO
 import torch
 from torchvision.io import read_image
 
-from coco_base import FlexCocoDatasetBase
+from flextd.flexcoco.coco_base import FlexCocoDatasetBase
 
 
 class FlexCocoDatasetBaseSS(FlexCocoDatasetBase):
