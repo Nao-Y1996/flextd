@@ -22,9 +22,29 @@ cd flextd
 poetry install
 ```
 
+## Supported Feature
+
+### Utils
+
+- [x] Generation of annotation files filtered for required information
+- [ ] Create new files for tran and val from one annotation file
+
+### Supported Annotation Format
+
+- [x] COCO
+- [ ] VOC
+
+### Template class of PyTorch Dataset
+
+- [ ] Object detection
+- [x] Semantic Segmentation
+- [ ] Instance Segmentation
+- [ ] Key Point Detection
+
 ## Usage
 
-Here is an example of how to use the `FlexCocoDatasetBaseSS` class provided by FlexTDS:
+Using flextd, you can generate Pytorch dataset classes that use only specific files or specific classes.
+The following code is an example of using the template classes provided by flextd.
 
 ```python
 import os
@@ -48,9 +68,10 @@ dataset = FlexCocoDatasetBaseSS(
     image_dir=image_dir,
     annotation_file=annotation_file,  # original annotation
     data_transforms=data_transforms,
-    exclude_files=["image1.jpg", "image2.jpg"],  # ignore these two images
-    exclude_categories=["person"]  # ignore 'person' category
+    exclude_files=["image1.jpg", "image2.jpg"],  # these two images are ignored
+    include_categories=["person"]  # only 'person' category is used
 )
+
 
 # Create a DataLoader
 data_loader = DataLoader(dataset, batch_size=5, shuffle=True)
@@ -60,23 +81,16 @@ for img, target in data_loader:
     print(img.shape, target)
 ```
 
-## Supported Feature
-
-### Utils
-
-- [x] Generation of annotation files filtered for required information
-
-### Annotation Format
-
-- [x] COCO
-- [ ] VOC
-
-### Dataset
-
-- [ ] Object detection
-- [x] Semantic Segmentation
-- [ ] Instance Segmentation
-- [ ] Key Point Detection
+You can also specify images that you want to use and categories that you want to ignore.
+```python
+dataset = FlexCocoDatasetBaseSS(
+    image_dir=image_dir,
+    annotation_file=annotation_file,  # original annotation
+    data_transforms=data_transforms,
+    include_files=["image1.jpg", "image2.jpg"],  # only these two images are used
+    exclude_categories=["person"]  # ignore 'person' category
+)
+```
 
 ## Future Plans
 
@@ -96,8 +110,6 @@ To run tests, you can use the following command:
 poetry run pytest
 ```
 
-Make sure you have the required test data in the `tests/data` directory.
-
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
