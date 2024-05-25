@@ -171,7 +171,7 @@ def filter_dataset(
 
 def create_filtered_annotation_file(
     annotation_file: str,
-    new_annotation_file: str,
+    new_annotation_file: str = None,
     include_files: list[str] = None,
     exclude_files: list[str] = None,
     include_categories: list[str] = None,
@@ -210,6 +210,8 @@ def create_filtered_annotation_file(
     )
 
     if annotation_dict is not None:
+        if new_annotation_file is None:
+            new_annotation_file = annotation_file.replace(".json", "_filtered.json")
         with open(new_annotation_file, "w") as f:
             json.dump(annotation_dict, f)
         return new_annotation_file

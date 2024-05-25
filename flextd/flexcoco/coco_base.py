@@ -1,7 +1,7 @@
 from pycocotools.coco import COCO
 from torch.utils.data import Dataset
 
-from utils import create_filtered_annotation_file
+from flextd.flexcoco.utils import create_filtered_annotation_file
 
 
 class FlexCocoDatasetBase(Dataset):
@@ -94,3 +94,20 @@ class FlexCocoDatasetBase(Dataset):
         """
         categories = self.coco.loadCats(self.coco.getCatIds())
         return [category["name"] for category in categories]
+
+    def get_statistics(self) -> dict:
+        """
+        get statistics of the dataset.
+
+        Returns
+        -------
+        cat_stat: dict
+            dictionary containing category name and the number of images
+        """
+        cat_ids = self.coco.getCatIds()
+        cat_stat = {}
+        for cat_id in cat_ids:
+            images = self.coco.getImgIds(catIds=cat_id)
+            categories = self.coco.loadCats(ids=[cat_id])
+            cat_stat[categories[0]["name"]] = len(images)
+        return cat_stat
